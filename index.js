@@ -1,9 +1,14 @@
-const data = require('./data')
-const http = require('http')
+const fs = require('fs');
+const colors = require('colors');
 
-http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.write(JSON.stringify(data))
-    res.end()
+const input = process.argv;
+console.log(input);
+if (input[2] === "add") {
+    fs.writeFileSync(input[3], input[4]);
 }
-).listen(3000)
+else if (input[2] === "remove") {
+    fs.unlinkSync(input[3]);
+}
+else {
+    console.log("Error");
+}
